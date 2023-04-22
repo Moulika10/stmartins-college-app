@@ -1,0 +1,33 @@
+# docker-compose.yml
+
+version: "3"
+services:
+  db:
+    image: "postgres:10.18"
+    ports:
+      - "54321:5432"
+    volumes:
+      - ./pgData:/var/lib/psotgresql/data
+    env_file:
+      - ./config/env/local.config.env
+
+  redis:
+    container_name: martins_redis
+    image: redis:6.0.5-alpine
+    command: sh -c "redis-server"
+    ports:
+      - 6379:6379
+
+  app:
+    working_dir: /app
+    entrypoint: ["/bin/bash", "./docker_compose_local_set_up.sh"]
+    image: node:14
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "3030:3030"
+    volumes:
+      - .:/app
+    env_file:
+      - ./config/env/local.config.env

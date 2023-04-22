@@ -1,0 +1,22 @@
+[
+  {
+    "id": "47936bd0-540c-4425-a9e4-05f96362478d",
+    "email": "Moulika.Bandi@gmail.com",
+    "firstName": "Moulika",
+    "lastName": "Bandi",
+    "password": "pass",
+    "roles": "[\"ADMIN\", \"STUDENT\", \"LECTURER\"]",
+    "createdAt": "now()",
+    "updatedAt": "now()"
+  },
+  {
+    "id": "17cecd5b-3d04-4c90-8524-8f839da43000",
+    "email": "Jashwanth.Reddy@gmail.com",
+    "firstName": "Jashwanth",
+    "lastName": "Reddy",
+    "password": "pass",
+    "roles": "[\"ADMIN\", \"STUDENT\", \"LECTURER\"]",
+    "createdAt": "now()",
+    "updatedAt": "now()"
+  }
+]
