@@ -3,6 +3,7 @@ import { RestHandler, UserRestHandler } from "../handlers"
 import { validate } from "../utils/validator"
 import { Router } from "express"
 import { TokenSchema } from "../models"
+import { AddUserSchema } from "../models/schemas/UserSchema"
 
 const router = Router()
 
@@ -15,6 +16,9 @@ router.get(
   "/users/:id",
   validate({ params: TokenSchema as ValidateFunction }),
   UserRestHandler.getUser
+)
+router.post("/sign-up", validate({body: AddUserSchema as ValidateFunction }),
+UserRestHandler.createUser
 )
 
 export { router }

@@ -3,11 +3,12 @@ import { postgresORM } from "../postgres.ds"
 import { Model, DataTypes, Optional } from "sequelize"
 
 export interface UserAttributes {
-  id: string
+  id?: string | undefined
   email: string
   firstName: string
   lastName: string
   password: string
+  userName: string
   roles: JSON
   createdAt: Date
   updatedAt: Date
@@ -27,6 +28,7 @@ class User extends Model<UserAttributes> implements UserAttributes {
   public lastName!: string
   public password!: string
   public roles!: JSON
+  public userName!: string
 
   // timestamps!
   public readonly createdAt!: Date
@@ -39,6 +41,7 @@ User.init(
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4
     },
     email: {
       type: DataTypes.STRING(255),
@@ -57,6 +60,10 @@ User.init(
       allowNull: false,
     },
     password: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    userName: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },

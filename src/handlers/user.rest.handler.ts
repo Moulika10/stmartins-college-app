@@ -2,10 +2,12 @@ import { Request, Response } from "express"
 import { UserController } from "../controllers"
 import createError from "http-errors"
 import { Guid } from "guid-typescript"
+import { UniqueConstraintError, ValidationError } from "sequelize"
 
 type Next = (err: Error) => void | Promise<void>
 
 class UserRestHandler {
+ 
   public static async getUser(
     req: Request,
     res: Response,
@@ -28,6 +30,7 @@ class UserRestHandler {
       )
     }
   }
+  
   public static async getUsers(
     req: Request,
     res: Response,
@@ -41,6 +44,24 @@ class UserRestHandler {
       next(
         new createError.InternalServerError(
           "An unexpected error has been encountered."
+        )
+      )
+    }
+  }
+  
+  public static async createUser (req: Request,
+    res: Response,
+    next: Next
+  ): Promise<void> {
+    try {
+      const user = await UserController.createUser(req.body);
+      res.status(201).json({data: user});
+    } catch(error){
+      const err = error as Error;
+
+      next(
+        new createError.InternalServerError(
+          `An unexpected error has been encountered. ${ err.message}`
         )
       )
     }

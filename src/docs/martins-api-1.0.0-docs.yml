@@ -20,7 +20,7 @@ paths:
   /users:
     get:
       tags:
-        - developers
+        - users
       summary: searches users
       operationId: getUsers
       description: |
@@ -35,10 +35,52 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+  /sign-up: 
+    post: 
+      tags: 
+        - users
+      summary: Create Users
+      operationId: createUser
+      description: |
+        By passing in the appropriate request body, you can create user in the system
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              $ref: "#/components/schemas/AddUser"
+            example: >-
+              {
+                "email" : "Moulikb10@gmail.com",
+                "firstName": "Test",
+                "lastName": "User",
+                "userName": "Test",
+                "password": "abc",
+                "roles" : ["ADMIN"]
+              }
+      responses:
+        "201":
+          description: created User
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+        "422":
+          description: bad input parameter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError" 
   /users/{id}:
     get:
       tags:
-        - developers
+        - users
       summary: get a user by id
       operationId: getUser
       description: |
@@ -74,9 +116,6 @@ components:
   schemas:
     User:
       type: object
-      required:
-        - id
-        - email
       properties:
         id:
           type: string
@@ -84,7 +123,27 @@ components:
           example: "47936bd0-540c-4425-a9e4-05f96362478d"
         email:
           type: string
-          example: "test1@dtn.com"
+          example: "test1@gmail.com"
+        firstName:
+          type: string
+          example: "test"
+        lastName:
+          type: string
+          example: "user"
+        userName: 
+          type: string
+          example: test
+        password:
+          type: string
+          example: "abc"  
+        roles:
+          type: array
+          items:
+            type: string
+            enum: 
+              - ADMIN
+              - STUDENT
+              - LECTURER
         createdAt:
           type: string
           format: date-time
@@ -93,6 +152,39 @@ components:
           type: string
           format: date-time
           example: "2021-12-01T17:53:30.675Z"
+    AddUser:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - pasword
+        - email
+        - userName
+        - roles
+      properties:
+        email:
+          type: string
+          example: "test1@gmail.com"
+        firstName:
+          type: string
+          example: "test"
+        lastName:
+          type: string
+          example: "user"
+        userName: 
+          type: string
+          example: test
+        password:
+          type: string
+          example: "abc"  
+        roles:
+          type: array
+          items:
+            type: string
+            enum: 
+              - ADMIN
+              - STUDENT
+              - LECTURER
     ErrorModel:
       type: object
       required:

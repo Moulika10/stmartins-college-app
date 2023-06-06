@@ -16,18 +16,18 @@ create your local postgres db with password as "pass" in Postgres(PgAdmin)
 Run the following script to set up the db with data and run the application
 
 1.  npm install
-2.  export NODE_ENV=local
+2.  export NODE_ENV=local / set NODE_ENV=local
 3.  npm run start-local
 ```
 
 If you could run your migrations successfully you should see tables being created in you postgres public db.
 
 If successful, you should be able to use one of the following links to verify your service is running and can be communicated with:
-Otherwise: `http://localhost:3000/api/v1/health-check`
+Otherwise: `http://localhost:3030/api/v1/health-check`
 
 ## Run Services
 
-Once your app is up and running you should see a swagger page on `http://localhost:3000/api/v1/docs` try to execute the endpoints you should see the data coming back.
+Once your app is up and running you should see a swagger page on `http://localhost:3030/api/v1/docs` try to execute the endpoints you should see the data coming back.
 
 ## Resolutions
 

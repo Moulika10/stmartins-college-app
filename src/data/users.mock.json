@@ -5,6 +5,7 @@
     "firstName": "Moulika",
     "lastName": "Bandi",
     "password": "pass",
+    "userName": "Moulika",
     "roles": "[\"ADMIN\", \"STUDENT\", \"LECTURER\"]",
     "createdAt": "now()",
     "updatedAt": "now()"
@@ -15,6 +16,7 @@
     "firstName": "Jashwanth",
     "lastName": "Reddy",
     "password": "pass",
+    "userName": "Jashwanth",
     "roles": "[\"ADMIN\", \"STUDENT\", \"LECTURER\"]",
     "createdAt": "now()",
     "updatedAt": "now()"
